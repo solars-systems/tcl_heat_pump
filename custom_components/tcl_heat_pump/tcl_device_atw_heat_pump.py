@@ -24,6 +24,9 @@ class TCL_ATW_HeatPump_DeviceData:
         self.target_temp_room_z1 = float(try_get_value(delta, aws_thing_state, "htEvTGd1", try_get_value(delta, aws_thing_state, "htEvTWd1", 20)))
         self.eco_status = int(try_get_value(delta, aws_thing_state, "ECOStatus", 0))
         self.ptc = int(try_get_value(delta, aws_thing_state, "PTC", 0))
+        self.weather_control_sw_1 = int(try_get_value(delta, aws_thing_state, "wthCtlSw1", 0))
+        self.heating_curve_1 = int(try_get_value(delta, aws_thing_state, "htWthCtl1", 1))
+        self.cooling_curve_1 = int(try_get_value(delta, aws_thing_state, "clWthCtl1", 0))
 
     device_id: str
     pwr_sw_1: int
@@ -40,6 +43,9 @@ class TCL_ATW_HeatPump_DeviceData:
     target_temp_room_z1: float
     eco_status: int
     ptc: int
+    weather_control_sw_1: int
+    heating_curve_1: int
+    cooling_curve_1: int
 
 
 async def get_stored_atw_heat_pump_data(

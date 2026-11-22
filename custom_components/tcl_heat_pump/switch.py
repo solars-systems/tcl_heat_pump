@@ -97,6 +97,10 @@ class DesiredStateHandlerForSwitch:
                 return await self.coordinator.get_aws_iot().async_set_desired_state(
                     self.device.device_id, {"PTC": value}
                 )
+            case DeviceFeatureEnum.SWITCH_ATW_WEATHER_CONTROL_1:
+                return await self.coordinator.get_aws_iot().async_set_desired_state(
+                    self.device.device_id, {"wthCtlSw1": value}
+                )
 
     def is_allowed(self) -> bool:
         mode = self.device.mode_value_to_enum_mapp.get(
@@ -391,6 +395,19 @@ async def async_setup_entry(
                     name="PTC Electric Heater Switch",
                     icon_fn=lambda device: "mdi:heating-coil" if device and device.data and device.data.ptc == 1 else "mdi:radiator-off",
                     is_on_fn=lambda device: device.data.ptc,
+                )
+            )
+        if DeviceFeatureEnum.SWITCH_ATW_WEATHER_CONTROL_1 in device.supported_features:
+            switches.append(
+                SwitchHandler(
+                    hass=hass,
+                    coordinator=coordinator,
+                    device=device,
+                    deviceFeature=DeviceFeatureEnum.SWITCH_ATW_WEATHER_CONTROL_1,
+                    type="ATWWeatherControl1",
+                    name="Weather Compensation Curve Zone 1 Switch",
+                    icon_fn=lambda device: "mdi:chart-bell-curve" if device and device.data and device.data.weather_control_sw_1 == 1 else "mdi:chart-bell-curve-cumulative",
+                    is_on_fn=lambda device: device.data.weather_control_sw_1,
                 )
             )
 

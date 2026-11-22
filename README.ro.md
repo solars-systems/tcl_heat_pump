@@ -24,6 +24,9 @@
 * **Reglaj Temperatură Apă Zona 1 (`htWtTWd1`)**: Setează temperatura țintă pe tur pentru Zona 1 (20°C – 65°C).
 * **Reglaj Temperatură Ambientală Cameră Zona 1 (`htEvTGd1`)**: Setează temperatura dorită în cameră / termostat (16°C – 32°C).
 * **Reglaj Temperatură Boiler ACM (`lvHWtT`)**: Setează temperatura dorită a apei calde menajere (30°C – 60°C).
+* **Comutator Curbă Climatică Zona 1 (`wthCtlSw1`)**: Activează sau dezactivează compensarea climatică după temperatura exterioară.
+* **Curbă Climatică Încălzire Zona 1 (`htWthCtl1`)**: Selectează curba de încălzire (Curba 1 – 9).
+* **Curbă Climatică Răcire Zona 1 (`clWthCtl1`)**: Selectează curba de răcire (Curba 1 – 8).
 
 ### 📊 Senzori și Telemetrie în Timp Real
 * Temperatura pe tur a Zonei 1 (`currentTemp1`)

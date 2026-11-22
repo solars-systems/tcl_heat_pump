@@ -90,6 +90,34 @@ async def async_setup_entry(
                     value_fn=lambda device: device.data.target_temp_room_z1,
                 )
             )
+        if DeviceFeatureEnum.SENSOR_ATW_HEATING_CURVE_1 in device.supported_features:
+            sensors.append(
+                IntNumberSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="ATWHeatingCurve1",
+                    name="Heating Weather Curve Zone 1 Sensor",
+                    device_classification=None,
+                    state_classification=None,
+                    icon_fn=lambda device: "mdi:chart-bell-curve",
+                    native_unit_of_measurement="",
+                    value_fn=lambda device: device.data.heating_curve_1,
+                )
+            )
+        if DeviceFeatureEnum.SENSOR_ATW_COOLING_CURVE_1 in device.supported_features:
+            sensors.append(
+                IntNumberSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="ATWCoolingCurve1",
+                    name="Cooling Weather Curve Zone 1 Sensor",
+                    device_classification=None,
+                    state_classification=None,
+                    icon_fn=lambda device: "mdi:chart-bell-curve",
+                    native_unit_of_measurement="",
+                    value_fn=lambda device: device.data.cooling_curve_1,
+                )
+            )
         if DeviceFeatureEnum.SENSOR_INTERNAL_UNIT_COIL_TEMPERATURE in device.supported_features:
             sensors.append(
                 TemperatureSensor(

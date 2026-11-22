@@ -49,6 +49,11 @@ class DeviceFeatureEnum(StrEnum):
     NUMBER_ATW_ROOM_Z1_TARGET = "number.atw.room_z1_target"
     NUMBER_ATW_DHW_TARGET = "number.atw.dhw_target"
     SENSOR_ATW_ROOM_Z1_TARGET = "sensor.atw.room_z1_target"
+    SWITCH_ATW_WEATHER_CONTROL_1 = "switch.atw.weather_control_1"
+    NUMBER_ATW_HEATING_CURVE_1 = "number.atw.heating_curve_1"
+    NUMBER_ATW_COOLING_CURVE_1 = "number.atw.cooling_curve_1"
+    SENSOR_ATW_HEATING_CURVE_1 = "sensor.atw.heating_curve_1"
+    SENSOR_ATW_COOLING_CURVE_1 = "sensor.atw.cooling_curve_1"
     SWITCH_POWER = "switch.powerSwitch"
     SWITCH_BEEP = "switch.beepSwitch"
     SWITCH_ECO = "switch.eco"
@@ -536,9 +541,14 @@ def getSupportedFeatures(
                     DeviceFeatureEnum.SWITCH_ATW_DHW_POWER,
                     DeviceFeatureEnum.SWITCH_ATW_ECO,
                     DeviceFeatureEnum.SWITCH_ATW_PTC,
+                    DeviceFeatureEnum.SWITCH_ATW_WEATHER_CONTROL_1,
                     DeviceFeatureEnum.NUMBER_ATW_HEAT_Z1_TARGET,
                     DeviceFeatureEnum.NUMBER_ATW_ROOM_Z1_TARGET,
                     DeviceFeatureEnum.NUMBER_ATW_DHW_TARGET,
+                    DeviceFeatureEnum.NUMBER_ATW_HEATING_CURVE_1,
+                    DeviceFeatureEnum.NUMBER_ATW_COOLING_CURVE_1,
+                    DeviceFeatureEnum.SENSOR_ATW_HEATING_CURVE_1,
+                    DeviceFeatureEnum.SENSOR_ATW_COOLING_CURVE_1,
                 ]
                 if has_power_consumption_data:
                     features.append(DeviceFeatureEnum.SENSOR_POWER_CONSUMPTION_DAILY)

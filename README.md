@@ -27,6 +27,9 @@
 * **Target Water Temp Zone 1 (`htWtTWd1`)**: Adjust target flow temperature for Zone 1 heating (20°C – 65°C).
 * **Target Room Temp Zone 1 (`htEvTGd1`)**: Set target ambient / room temperature for Zone 1 (16°C – 32°C).
 * **Target DHW Water Temp (`lvHWtT`)**: Set target domestic hot water cylinder temperature (30°C – 60°C).
+* **Weather Compensation Zone 1 Switch (`wthCtlSw1`)**: Enable / disable automatic weather compensation heating curve.
+* **Heating Weather Curve Zone 1 (`htWthCtl1`)**: Select heating weather compensation curve (Curve 1 – 9).
+* **Cooling Weather Curve Zone 1 (`clWthCtl1`)**: Select cooling weather compensation curve (Curve 1 – 8).
 
 ### 📊 Comprehensive Telemetry & Sensors
 * Zone 1 flow temperature (`currentTemp1`)
@@ -80,6 +83,9 @@ Special thanks to [@nemesa](https://github.com/nemesa) for creating the initial 
 * **Reglaj Temperatură Apă Zona 1 (`htWtTWd1`)**: Setează temperatura țintă pe tur pentru Zona 1 (20°C – 65°C).
 * **Reglaj Temperatură Ambientală Cameră Zona 1 (`htEvTGd1`)**: Setează temperatura dorită în cameră / termostat (16°C – 32°C).
 * **Reglaj Temperatură Boiler ACM (`lvHWtT`)**: Setează temperatura dorită a apei calde menajere (30°C – 60°C).
+* **Comutator Curbă Climatică Zona 1 (`wthCtlSw1`)**: Activează sau dezactivează compensarea climatică după temperatura exterioară.
+* **Curbă Climatică Încălzire Zona 1 (`htWthCtl1`)**: Selectează curba de încălzire (Curba 1 – 9).
+* **Curbă Climatică Răcire Zona 1 (`clWthCtl1`)**: Selectează curba de răcire (Curba 1 – 8).
 
 ### 📊 Senzori și Telemetrie în Timp Real
 * Temperatura pe tur a Zonei 1 (`currentTemp1`)
