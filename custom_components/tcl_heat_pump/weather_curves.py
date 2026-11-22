@@ -2,6 +2,16 @@
 
 Based on official TCL ATW R290 Heat Pump manual:
 Table of Heating Ambient Temperatures - Target Water Temperatures (Unit: °C).
+
+Note: The TCL Home app and firmware use 1-based curve indexing:
+- Value 1 = Low Temperature Curve 1 (Pardoseală)
+- Value 2 = Low Temperature Curve 2 (Pardoseală)
+...
+- Value 8 = Low Temperature Curve 8 (Pardoseală)
+- Value 9 = Low Temperature Curve 9 (Inginerie)
+- Value 10 = High Temperature Curve 1 (Calorifere / Radiatoare)
+...
+- Value 18 = High Temperature Curve 9 (Inginerie)
 """
 
 from typing import Any
@@ -183,8 +193,8 @@ def _build_high_temp_curve(
 
 
 HEATING_CURVES: dict[int, dict[str, Any]] = {
-    0: {
-        "id": 0,
+    1: {
+        "id": 1,
         "name": "Curba 1 Pardoseală (32°C - 38°C)",
         "label": "Low Temp 1 (Floor 32-38°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -192,8 +202,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 38,
         "points": _build_low_temp_curve_1(),
     },
-    1: {
-        "id": 1,
+    2: {
+        "id": 2,
         "name": "Curba 2 Pardoseală (31°C - 37°C)",
         "label": "Low Temp 2 (Floor 31-37°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -201,8 +211,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 37,
         "points": _build_low_temp_curve_2(),
     },
-    2: {
-        "id": 2,
+    3: {
+        "id": 3,
         "name": "Curba 3 Pardoseală (29°C - 36°C)",
         "label": "Low Temp 3 (Floor 29-36°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -210,8 +220,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 36,
         "points": _build_low_temp_curve_3(),
     },
-    3: {
-        "id": 3,
+    4: {
+        "id": 4,
         "name": "Curba 4 Pardoseală (28°C - 35°C)",
         "label": "Low Temp 4 (Floor 28-35°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -219,8 +229,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 35,
         "points": _build_low_temp_curve_4(),
     },
-    4: {
-        "id": 4,
+    5: {
+        "id": 5,
         "name": "Curba 5 Pardoseală (27°C - 34°C)",
         "label": "Low Temp 5 (Floor 27-34°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -228,8 +238,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 34,
         "points": _build_low_temp_curve_5(),
     },
-    5: {
-        "id": 5,
+    6: {
+        "id": 6,
         "name": "Curba 6 Pardoseală (26°C - 32°C)",
         "label": "Low Temp 6 (Floor 26-32°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -237,8 +247,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 32,
         "points": _build_low_temp_curve_6(),
     },
-    6: {
-        "id": 6,
+    7: {
+        "id": 7,
         "name": "Curba 7 Pardoseală (25°C - 31°C)",
         "label": "Low Temp 7 (Floor 25-31°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -246,8 +256,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 31,
         "points": _build_low_temp_curve_7(),
     },
-    7: {
-        "id": 7,
+    8: {
+        "id": 8,
         "name": "Curba 8 Pardoseală (24°C - 29°C)",
         "label": "Low Temp 8 (Floor 24-29°C)",
         "emitter": "Pardoseală (Low Temp)",
@@ -255,8 +265,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 29,
         "points": _build_low_temp_curve_8(),
     },
-    8: {
-        "id": 8,
+    9: {
+        "id": 9,
         "name": "Curba 9 Pardoseală (Personalizată Inginerie)",
         "label": "Low Temp 9 (Engineering Custom)",
         "emitter": "Pardoseală (Low Temp)",
@@ -264,8 +274,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": None,
         "points": {},
     },
-    9: {
-        "id": 9,
+    10: {
+        "id": 10,
         "name": "Curba 1 Calorifere (50°C - 55°C)",
         "label": "High Temp 1 (Radiators 50-55°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -273,8 +283,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 55,
         "points": _build_high_temp_curve(55, 54, 53, 52, 51, 50),
     },
-    10: {
-        "id": 10,
+    11: {
+        "id": 11,
         "name": "Curba 2 Calorifere (48°C - 53°C)",
         "label": "High Temp 2 (Radiators 48-53°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -282,8 +292,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 53,
         "points": _build_high_temp_curve(53, 52, 51, 50, 49, 48),
     },
-    11: {
-        "id": 11,
+    12: {
+        "id": 12,
         "name": "Curba 3 Calorifere (47°C - 52°C)",
         "label": "High Temp 3 (Radiators 47-52°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -291,8 +301,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 52,
         "points": _build_high_temp_curve(52, 51, 50, 49, 48, 47),
     },
-    12: {
-        "id": 12,
+    13: {
+        "id": 13,
         "name": "Curba 4 Calorifere (45°C - 50°C)",
         "label": "High Temp 4 (Radiators 45-50°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -300,8 +310,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 50,
         "points": _build_high_temp_curve(50, 49, 48, 47, 46, 45),
     },
-    13: {
-        "id": 13,
+    14: {
+        "id": 14,
         "name": "Curba 5 Calorifere (43°C - 48°C)",
         "label": "High Temp 5 (Radiators 43-48°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -309,8 +319,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 48,
         "points": _build_high_temp_curve(48, 47, 46, 45, 44, 43),
     },
-    14: {
-        "id": 14,
+    15: {
+        "id": 15,
         "name": "Curba 6 Calorifere (40°C - 45°C)",
         "label": "High Temp 6 (Radiators 40-45°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -318,8 +328,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 45,
         "points": _build_high_temp_curve(45, 44, 43, 42, 41, 40),
     },
-    15: {
-        "id": 15,
+    16: {
+        "id": 16,
         "name": "Curba 7 Calorifere (38°C - 43°C)",
         "label": "High Temp 7 (Radiators 38-43°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -327,8 +337,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 43,
         "points": _build_high_temp_curve(43, 42, 41, 40, 39, 38),
     },
-    16: {
-        "id": 16,
+    17: {
+        "id": 17,
         "name": "Curba 8 Calorifere (35°C - 40°C)",
         "label": "High Temp 8 (Radiators 35-40°C)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -336,8 +346,8 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
         "max_water": 40,
         "points": _build_high_temp_curve(40, 39, 38, 37, 36, 35),
     },
-    17: {
-        "id": 17,
+    18: {
+        "id": 18,
         "name": "Curba 9 Calorifere (Personalizată Inginerie)",
         "label": "High Temp 9 (Engineering Custom)",
         "emitter": "Calorifere / Radiatoare (High Temp)",
@@ -347,14 +357,17 @@ HEATING_CURVES: dict[int, dict[str, Any]] = {
     },
 }
 
+# Alias for 0 to map to Curve 1
+HEATING_CURVES[0] = HEATING_CURVES[1]
+
 
 def get_heating_curve_options() -> list[str]:
-    """Return all heating curve options for Home Assistant Select."""
-    return [c["name"] for c in HEATING_CURVES.values()]
+    """Return all 18 heating curve options for Home Assistant Select."""
+    return [HEATING_CURVES[i]["name"] for i in range(1, 19)]
 
 
 def get_heating_curve_name(index: int) -> str:
-    """Return friendly name for curve index."""
+    """Return friendly name for curve index (1-18, fallback to 1)."""
     curve = HEATING_CURVES.get(index)
     if curve:
         return curve["name"]
@@ -362,8 +375,11 @@ def get_heating_curve_name(index: int) -> str:
 
 
 def get_heating_curve_index(name_or_label: str) -> int:
-    """Return curve index from option string."""
-    for idx, c in HEATING_CURVES.items():
+    """Return curve index (1-18) from option string."""
+    for idx in range(1, 19):
+        c = HEATING_CURVES.get(idx)
+        if not c:
+            continue
         if (
             c["name"] == name_or_label
             or c["label"] == name_or_label
@@ -373,8 +389,10 @@ def get_heating_curve_index(name_or_label: str) -> int:
     # Fallback try numeric parse
     try:
         val = int(name_or_label)
-        if 0 <= val <= 17:
+        if 1 <= val <= 18:
             return val
+        if val == 0:
+            return 1
     except (ValueError, TypeError):
         pass
     return 1
@@ -383,7 +401,7 @@ def get_heating_curve_index(name_or_label: str) -> int:
 def get_target_water_temp_from_curve(curve_index: int, ambient_temp: float) -> int | None:
     """Calculate target flow water temperature given ambient outdoor temperature."""
     curve = HEATING_CURVES.get(curve_index)
-    if not curve or not curve["points"]:
+    if not curve or not curve.get("points"):
         return None
     t = int(round(ambient_temp))
     if t < -20:
@@ -395,10 +413,10 @@ def get_target_water_temp_from_curve(curve_index: int, ambient_temp: float) -> i
 
 def get_heating_curve_attributes(curve_index: int, ambient_temp: float | None = None) -> dict[str, Any]:
     """Get rich dictionary of curve metadata and points for Home Assistant attributes."""
-    curve = HEATING_CURVES.get(curve_index, {})
+    curve = HEATING_CURVES.get(curve_index, HEATING_CURVES[1])
     points = curve.get("points", {})
     attrs: dict[str, Any] = {
-        "curve_id": curve_index,
+        "curve_id": curve.get("id", curve_index),
         "curve_name": curve.get("name", f"Curba {curve_index}"),
         "curve_label": curve.get("label", ""),
         "emitter_type": curve.get("emitter", ""),

@@ -325,7 +325,7 @@ async def async_setup_entry(
                     type="SetATWHeatingCurve1",
                     current_value_fn=lambda device: int(device.data.heating_curve_1),
                     min_val=1,
-                    max_val=9,
+                    max_val=18,
                 )
             )
 
