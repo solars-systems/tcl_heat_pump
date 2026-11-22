@@ -25,6 +25,7 @@
 * **ECO Mode Switch (`ECOStatus`)**: Toggle ECO energy-saving mode.
 * **PTC Electric Heater Switch (`PTC`)**: Control auxiliary electric booster heater.
 * **Target Water Temp Zone 1 (`htWtTWd1`)**: Adjust target flow temperature for Zone 1 heating (20°C – 65°C).
+* **Target Room Temp Zone 1 (`htEvTGd1`)**: Set target ambient / room temperature for Zone 1 (16°C – 32°C).
 * **Target DHW Water Temp (`lvHWtT`)**: Set target domestic hot water cylinder temperature (30°C – 60°C).
 
 ### 📊 Comprehensive Telemetry & Sensors
@@ -77,6 +78,7 @@ Special thanks to [@nemesa](https://github.com/nemesa) for creating the initial 
 * **Comutator Mod ECO (`ECOStatus`)**: Activează sau dezactivează modul economic.
 * **Comutator Rezistență Electrică PTC (`PTC`)**: Comandă rezistența electrică auxiliară de încălzire.
 * **Reglaj Temperatură Apă Zona 1 (`htWtTWd1`)**: Setează temperatura țintă pe tur pentru Zona 1 (20°C – 65°C).
+* **Reglaj Temperatură Ambientală Cameră Zona 1 (`htEvTGd1`)**: Setează temperatura dorită în cameră / termostat (16°C – 32°C).
 * **Reglaj Temperatură Boiler ACM (`lvHWtT`)**: Setează temperatura dorită a apei calde menajere (30°C – 60°C).
 
 ### 📊 Senzori și Telemetrie în Timp Real

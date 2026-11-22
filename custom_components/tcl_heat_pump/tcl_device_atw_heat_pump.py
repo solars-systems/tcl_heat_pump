@@ -21,6 +21,7 @@ class TCL_ATW_HeatPump_DeviceData:
         self.current_temp_domestic = float(try_get_value(delta, aws_thing_state, "currentTempDomestic", 0))
         self.target_temp_domestic = float(try_get_value(delta, aws_thing_state, "lvHWtT", 0))
         self.target_temp_heat_z1 = float(try_get_value(delta, aws_thing_state, "htWtTWd1", 0))
+        self.target_temp_room_z1 = float(try_get_value(delta, aws_thing_state, "htEvTGd1", try_get_value(delta, aws_thing_state, "htEvTWd1", 20)))
         self.eco_status = int(try_get_value(delta, aws_thing_state, "ECOStatus", 0))
         self.ptc = int(try_get_value(delta, aws_thing_state, "PTC", 0))
 
@@ -36,6 +37,7 @@ class TCL_ATW_HeatPump_DeviceData:
     current_temp_domestic: float
     target_temp_domestic: float
     target_temp_heat_z1: float
+    target_temp_room_z1: float
     eco_status: int
     ptc: int
 

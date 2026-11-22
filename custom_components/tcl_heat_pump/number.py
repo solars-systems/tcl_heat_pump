@@ -49,6 +49,10 @@ class DesiredStateHandlerForNumber:
                 return await self.coordinator.get_aws_iot().async_set_desired_state(
                     self.device.device_id, {"htWtTWd1": int(value)}
                 )
+            case DeviceFeatureEnum.NUMBER_ATW_ROOM_Z1_TARGET:
+                return await self.coordinator.get_aws_iot().async_set_desired_state(
+                    self.device.device_id, {"htEvTGd1": int(value)}
+                )
             case DeviceFeatureEnum.NUMBER_ATW_DHW_TARGET:
                 return await self.coordinator.get_aws_iot().async_set_desired_state(
                     self.device.device_id, {"lvHWtT": int(value)}
@@ -269,6 +273,22 @@ async def async_setup_entry(
             z1_handler._attr_native_max_value = 65
             z1_handler._attr_native_step = 1
             customEntities.append(z1_handler)
+
+        if DeviceFeatureEnum.NUMBER_ATW_ROOM_Z1_TARGET in device.supported_features:
+            room_handler = TemperatureHandler(
+                hass=hass,
+                coordinator=coordinator,
+                device=device,
+                deviceFeature=DeviceFeatureEnum.NUMBER_ATW_ROOM_Z1_TARGET,
+                name="Set Room Temp Zone 1",
+                type="SetATWRoomZ1Target",
+                available_fn=lambda device: True,
+                current_value_fn=lambda device: int(device.data.target_temp_room_z1),
+            )
+            room_handler._attr_native_min_value = 16
+            room_handler._attr_native_max_value = 32
+            room_handler._attr_native_step = 1
+            customEntities.append(room_handler)
 
         if DeviceFeatureEnum.NUMBER_ATW_DHW_TARGET in device.supported_features:
             dhw_handler = TemperatureHandler(

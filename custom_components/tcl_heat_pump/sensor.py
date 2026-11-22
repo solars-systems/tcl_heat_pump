@@ -80,6 +80,16 @@ async def async_setup_entry(
                     value_fn=lambda device: device.data.target_temp_heat_z1,
                 )
             )
+        if DeviceFeatureEnum.SENSOR_ATW_ROOM_Z1_TARGET in device.supported_features:
+            sensors.append(
+                TemperatureSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="TargetRoomTempZone1",
+                    name="Target Room Temperature Zone 1",
+                    value_fn=lambda device: device.data.target_temp_room_z1,
+                )
+            )
         if DeviceFeatureEnum.SENSOR_INTERNAL_UNIT_COIL_TEMPERATURE in device.supported_features:
             sensors.append(
                 TemperatureSensor(

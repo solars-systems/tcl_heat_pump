@@ -46,7 +46,9 @@ class DeviceFeatureEnum(StrEnum):
     SWITCH_ATW_ECO = "switch.atw.eco"
     SWITCH_ATW_PTC = "switch.atw.ptc"
     NUMBER_ATW_HEAT_Z1_TARGET = "number.atw.heat_z1_target"
+    NUMBER_ATW_ROOM_Z1_TARGET = "number.atw.room_z1_target"
     NUMBER_ATW_DHW_TARGET = "number.atw.dhw_target"
+    SENSOR_ATW_ROOM_Z1_TARGET = "sensor.atw.room_z1_target"
     SWITCH_POWER = "switch.powerSwitch"
     SWITCH_BEEP = "switch.beepSwitch"
     SWITCH_ECO = "switch.eco"
@@ -529,11 +531,13 @@ def getSupportedFeatures(
                     DeviceFeatureEnum.SENSOR_ATW_DHW_TEMPERATURE,
                     DeviceFeatureEnum.SENSOR_ATW_DHW_TARGET_TEMPERATURE,
                     DeviceFeatureEnum.SENSOR_ATW_HEAT_Z1_TARGET_TEMPERATURE,
+                    DeviceFeatureEnum.SENSOR_ATW_ROOM_Z1_TARGET,
                     DeviceFeatureEnum.SWITCH_ATW_ZONE1_POWER,
                     DeviceFeatureEnum.SWITCH_ATW_DHW_POWER,
                     DeviceFeatureEnum.SWITCH_ATW_ECO,
                     DeviceFeatureEnum.SWITCH_ATW_PTC,
                     DeviceFeatureEnum.NUMBER_ATW_HEAT_Z1_TARGET,
+                    DeviceFeatureEnum.NUMBER_ATW_ROOM_Z1_TARGET,
                     DeviceFeatureEnum.NUMBER_ATW_DHW_TARGET,
                 ]
                 if has_power_consumption_data:
