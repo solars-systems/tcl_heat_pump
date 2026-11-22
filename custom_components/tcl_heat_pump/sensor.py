@@ -129,6 +129,21 @@ async def async_setup_entry(
                     value_fn=lambda device: device.data.temp_water_flow_z1,
                 )
             )
+        if DeviceFeatureEnum.SENSOR_ATW_ESTIMATED_RETURN_WATER_TEMP_1 in device.supported_features:
+            sensors.append(
+                TemperatureSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="EstimatedReturnWaterTempZone1",
+                    name="Estimated Return Water Temp Zone 1",
+                    value_fn=lambda device: round(
+                        (device.data.temp_water_flow_z1 - 4.0)
+                        if device.data.temp_water_flow_z1 > 10
+                        else device.data.temp_water_flow_z1,
+                        1,
+                    ),
+                )
+            )
         if DeviceFeatureEnum.SENSOR_ATW_ROOM_TEMP_RETURN_1 in device.supported_features:
             sensors.append(
                 TemperatureSensor(
@@ -536,7 +551,10 @@ class WeatherCurveSensor(TclEntityBase, SensorEntity):
         attrs = get_heating_curve_attributes(idx, ambient)
         attrs["grid_target_water_temp"] = getattr(self.device.data, "target_temp_curve_z1", 0)
         attrs["water_flow_temp"] = getattr(self.device.data, "temp_water_flow_z1", 0)
-        attrs["water_temp_return"] = getattr(self.device.data, "temp_water_flow_z1", 0)
+        attrs["estimated_return_water_temp"] = (
+            round(attrs["water_flow_temp"] - 4.0, 1) if attrs["water_flow_temp"] > 10 else attrs["water_flow_temp"]
+        )
+        attrs["estimated_delta_t"] = 4.0 if attrs["water_flow_temp"] > 10 else 0.0
         attrs["weather_control_active"] = (
             getattr(self.device.data, "weather_control_sw_1", 0) == 1
         )

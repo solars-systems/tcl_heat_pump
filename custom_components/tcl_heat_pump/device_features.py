@@ -57,6 +57,7 @@ class DeviceFeatureEnum(StrEnum):
     SELECT_ATW_HEATING_CURVE_1 = "select.atw.heating_curve_1"
     SENSOR_ATW_CURVE_TARGET_WATER_TEMP_1 = "sensor.atw.curve_target_water_temp_1"
     SENSOR_ATW_WATER_TEMP_FLOW_1 = "sensor.atw.water_temp_flow_1"
+    SENSOR_ATW_ESTIMATED_RETURN_WATER_TEMP_1 = "sensor.atw.estimated_return_water_temp_1"
     SENSOR_ATW_WATER_TEMP_RETURN_1 = "sensor.atw.water_temp_return_1"
     SENSOR_ATW_ROOM_TEMP_RETURN_1 = "sensor.atw.room_temp_return_1"
     SWITCH_POWER = "switch.powerSwitch"
@@ -557,6 +558,7 @@ def getSupportedFeatures(
                     DeviceFeatureEnum.SENSOR_ATW_COOLING_CURVE_1,
                     DeviceFeatureEnum.SENSOR_ATW_CURVE_TARGET_WATER_TEMP_1,
                     DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_FLOW_1,
+                    DeviceFeatureEnum.SENSOR_ATW_ESTIMATED_RETURN_WATER_TEMP_1,
                     DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_RETURN_1,
                     DeviceFeatureEnum.SENSOR_ATW_ROOM_TEMP_RETURN_1,
                 ]

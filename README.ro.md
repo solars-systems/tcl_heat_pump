@@ -39,6 +39,7 @@
 ### 📊 Senzori și Telemetrie în Timp Real
 * **Senzor Inteligent Curbă Climatică (`sensor.atw_heating_curve_1`)**: Afișează numele curbei active și expune ca atribute întregul set de date termice (`curve_points`), tipul emițătorului și temperatura calculată pe tur.
 * **Temperatură Apă pe Tur Reală (`sensor.water_flow_temp_zone_1` / `htWtTRr1`)**: Temperatura reală a apei pe TUR livrată în instalația de încălzire.
+* **Temperatură Retur Apă Estimată (`sensor.estimated_return_water_temp_zone_1`)**: Temperatură de retur estimată calculată automat cu 4°C mai mică decât turul apei ($\Delta T \approx 4^\circ\text{C}$), ideală pentru monitorizarea circuitului de încălzire.
 * **Temperatură Țintă pe Tur din Curbă (`sensor.curve_target_flow_temp_zone_1` / `htWtTGd1`)**: Temperatura pe tur calculată dinamic de pompa de căldură pe baza curbei climatice active.
 * **Temperatură Ambientală Cameră (`sensor.room_temperature_zone_1` / `currentTemp1`)**: Temperatura ambientală reală măsurată în încăpere (living).
 * **Temperatură Țintă Cameră (`htEvTGd1`)**: Temperatura ambientală dorită setată pentru încăpere.
