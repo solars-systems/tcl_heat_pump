@@ -28,10 +28,17 @@
 * **Target Room Temp Zone 1 (`htEvTGd1`)**: Set target ambient / room temperature for Zone 1 (16°C – 32°C).
 * **Target DHW Water Temp (`lvHWtT`)**: Set target domestic hot water cylinder temperature (30°C – 60°C).
 * **Weather Compensation Zone 1 Switch (`wthCtlSw1`)**: Enable / disable automatic weather compensation heating curve.
-* **Heating Weather Curve Zone 1 (`htWthCtl1`)**: Select heating weather compensation curve (Curve 1 – 9).
-* **Cooling Weather Curve Zone 1 (`clWthCtl1`)**: Select cooling weather compensation curve (Curve 1 – 8).
+* **Heating Weather Curve Zone 1 Dropdown (`select.heating_weather_curve_zone_1`)**: Friendly curve selector matching the official TCL ATW R290 manual:
+  - **Low Temperature Curves (Underfloor Heating)**: Curves 1 – 8 (flow range 24°C to 38°C) + Curve 9 (Custom Engineering)
+  - **High Temperature Curves (Radiators)**: Curves 1 – 8 (flow range 35°C to 55°C) + Curve 9 (Custom Engineering)
+* **Heating Weather Curve Slider (`htWthCtl1`)**: Direct numeric curve index (0 – 17).
+* **Cooling Weather Curve Slider (`clWthCtl1`)**: Direct numeric cooling curve index (0 – 8).
 
 ### 📊 Comprehensive Telemetry & Sensors
+* **Smart Weather Curve Sensor (`sensor.atw_heating_curve_1`)**: Displays active curve name with full state attributes (lookup table from -20°C to +20°C, emitter type, and calculated water target).
+* **Curve Target Water Temp Zone 1 (`htWtTGd1`)**: The dynamic target flow temperature calculated by the heat pump from the weather curve.
+* **Return Water Temp Zone 1 (`htWtTRr1`)**: Actual return water temperature from the heating system.
+* **Return Room Temp Zone 1 (`htEvTRr1`)**: Ambient room return air temperature.
 * Zone 1 flow temperature (`currentTemp1`)
 * Zone 2 & Zone 3 water temperatures
 * DHW Tank actual temperature (`currentTempDomestic`)

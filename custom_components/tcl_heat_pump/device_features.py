@@ -54,6 +54,10 @@ class DeviceFeatureEnum(StrEnum):
     NUMBER_ATW_COOLING_CURVE_1 = "number.atw.cooling_curve_1"
     SENSOR_ATW_HEATING_CURVE_1 = "sensor.atw.heating_curve_1"
     SENSOR_ATW_COOLING_CURVE_1 = "sensor.atw.cooling_curve_1"
+    SELECT_ATW_HEATING_CURVE_1 = "select.atw.heating_curve_1"
+    SENSOR_ATW_CURVE_TARGET_WATER_TEMP_1 = "sensor.atw.curve_target_water_temp_1"
+    SENSOR_ATW_WATER_TEMP_RETURN_1 = "sensor.atw.water_temp_return_1"
+    SENSOR_ATW_ROOM_TEMP_RETURN_1 = "sensor.atw.room_temp_return_1"
     SWITCH_POWER = "switch.powerSwitch"
     SWITCH_BEEP = "switch.beepSwitch"
     SWITCH_ECO = "switch.eco"
@@ -547,8 +551,12 @@ def getSupportedFeatures(
                     DeviceFeatureEnum.NUMBER_ATW_DHW_TARGET,
                     DeviceFeatureEnum.NUMBER_ATW_HEATING_CURVE_1,
                     DeviceFeatureEnum.NUMBER_ATW_COOLING_CURVE_1,
+                    DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1,
                     DeviceFeatureEnum.SENSOR_ATW_HEATING_CURVE_1,
                     DeviceFeatureEnum.SENSOR_ATW_COOLING_CURVE_1,
+                    DeviceFeatureEnum.SENSOR_ATW_CURVE_TARGET_WATER_TEMP_1,
+                    DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_RETURN_1,
+                    DeviceFeatureEnum.SENSOR_ATW_ROOM_TEMP_RETURN_1,
                 ]
                 if has_power_consumption_data:
                     features.append(DeviceFeatureEnum.SENSOR_POWER_CONSUMPTION_DAILY)

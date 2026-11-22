@@ -1,5 +1,6 @@
 """Interfaces with the Integration 101 Template api sensors."""
 import logging
+from typing import Any
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity,SensorStateClass
 from homeassistant.const import UnitOfEnergy, UnitOfTemperature, UnitOfTime, PERCENTAGE
@@ -10,6 +11,10 @@ from .coordinator import IotDeviceCoordinator
 from .device import Device
 from .device_features import DeviceFeatureEnum
 from .tcl_entity_base import TclEntityBase
+from .weather_curves import (
+    get_heating_curve_attributes,
+    get_heating_curve_name,
+)
 _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(
     hass: HomeAssistant,
@@ -92,16 +97,41 @@ async def async_setup_entry(
             )
         if DeviceFeatureEnum.SENSOR_ATW_HEATING_CURVE_1 in device.supported_features:
             sensors.append(
-                IntNumberSensor(
+                WeatherCurveSensor(
                     coordinator=coordinator,
                     device=device,
                     type="ATWHeatingCurve1",
-                    name="Heating Weather Curve Zone 1 Sensor",
-                    device_classification=None,
-                    state_classification=None,
-                    icon_fn=lambda device: "mdi:chart-bell-curve",
-                    native_unit_of_measurement="",
-                    value_fn=lambda device: device.data.heating_curve_1,
+                    name="Heating Weather Curve Zone 1",
+                )
+            )
+        if DeviceFeatureEnum.SENSOR_ATW_CURVE_TARGET_WATER_TEMP_1 in device.supported_features:
+            sensors.append(
+                TemperatureSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="CurveTargetWaterTempZone1",
+                    name="Curve Target Water Temp Zone 1",
+                    value_fn=lambda device: device.data.target_temp_curve_z1,
+                )
+            )
+        if DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_RETURN_1 in device.supported_features:
+            sensors.append(
+                TemperatureSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="ReturnWaterTempZone1",
+                    name="Return Water Temp Zone 1",
+                    value_fn=lambda device: device.data.temp_water_return_z1,
+                )
+            )
+        if DeviceFeatureEnum.SENSOR_ATW_ROOM_TEMP_RETURN_1 in device.supported_features:
+            sensors.append(
+                TemperatureSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="ReturnRoomTempZone1",
+                    name="Return Room Temp Zone 1",
+                    value_fn=lambda device: device.data.temp_room_return_z1,
                 )
             )
         if DeviceFeatureEnum.SENSOR_ATW_COOLING_CURVE_1 in device.supported_features:
@@ -471,3 +501,37 @@ class EnergyConsumptionSensor(TclEntityBase, SensorEntity):
     @property
     def state_class(self) -> str | None:
         return SensorStateClass.TOTAL_INCREASING
+
+
+class WeatherCurveSensor(TclEntityBase, SensorEntity):
+    def __init__(
+        self,
+        coordinator: IotDeviceCoordinator,
+        device: Device,
+        type: str,
+        name: str,
+    ) -> None:
+        TclEntityBase.__init__(self, coordinator, type, name, device)
+
+    @property
+    def icon(self):
+        return "mdi:chart-bell-curve"
+
+    @property
+    def native_value(self) -> str:
+        self.device = self.coordinator.get_device_by_id(self.device.device_id)
+        idx = int(getattr(self.device.data, "heating_curve_1", 1))
+        return get_heating_curve_name(idx)
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        self.device = self.coordinator.get_device_by_id(self.device.device_id)
+        idx = int(getattr(self.device.data, "heating_curve_1", 1))
+        ambient = getattr(self.device.data, "current_temperature", None)
+        attrs = get_heating_curve_attributes(idx, ambient)
+        attrs["grid_target_water_temp"] = getattr(self.device.data, "target_temp_curve_z1", 0)
+        attrs["water_temp_return"] = getattr(self.device.data, "temp_water_return_z1", 0)
+        attrs["weather_control_active"] = (
+            getattr(self.device.data, "weather_control_sw_1", 0) == 1
+        )
+        return attrs

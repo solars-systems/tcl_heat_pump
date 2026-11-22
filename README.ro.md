@@ -24,11 +24,18 @@
 * **Reglaj Temperatură Apă Zona 1 (`htWtTWd1`)**: Setează temperatura țintă pe tur pentru Zona 1 (20°C – 65°C).
 * **Reglaj Temperatură Ambientală Cameră Zona 1 (`htEvTGd1`)**: Setează temperatura dorită în cameră / termostat (16°C – 32°C).
 * **Reglaj Temperatură Boiler ACM (`lvHWtT`)**: Setează temperatura dorită a apei calde menajere (30°C – 60°C).
-* **Comutator Curbă Climatică Zona 1 (`wthCtlSw1`)**: Activează sau dezactivează compensarea climatică după temperatura exterioară.
-* **Curbă Climatică Încălzire Zona 1 (`htWthCtl1`)**: Selectează curba de încălzire (Curba 1 – 9).
-* **Curbă Climatică Răcire Zona 1 (`clWthCtl1`)**: Selectează curba de răcire (Curba 1 – 8).
+* **Comutator Curbă Climatică Zona 1 (`wthCtlSw1`)**: Activează sau dezactivează compensarea climatică automată după temperatura exterioară.
+* **Meniu Selector Curbă Climatică Încălzire Zona 1 (`select.heating_weather_curve_zone_1`)**: Selector prietenos cu toate curbele oficiale din manualul TCL ATW R290:
+  - **Curbe Temperatură Joasă (Pardoseală)**: Curbele 1 – 8 (plaje tur între 24°C și 38°C) + Curba 9 (Inginerie)
+  - **Curbe Temperatură Înaltă (Radiatoare / Calorifere)**: Curbele 1 – 8 (plaje tur între 35°C și 55°C) + Curba 9 (Inginerie)
+* **Slider Numeric Curbă Încălzire (`htWthCtl1`)**: Reglaj direct numeric (0 – 17).
+* **Slider Numeric Curbă Răcire (`clWthCtl1`)**: Reglaj direct curbe de răcire (0 – 8).
 
 ### 📊 Senzori și Telemetrie în Timp Real
+* **Senzor Inteligent Curbă Climatică (`sensor.atw_heating_curve_1`)**: Afișează numele curbei active și atribute detaliate cu întregul tabel de temperaturi (de la -20°C la +20°C), tipul emițătorului (pardoseală vs radiatoare) și temperatura calculată pe tur.
+* **Temperatură Țintă Calculată din Curbă (`htWtTGd1`)**: Temperatura pe tur calculată de pompa de căldură pe baza curbei climatice active.
+* **Temperatură Retur Apă Zona 1 (`htWtTRr1`)**: Temperatura apei la întoarcerea din instalație.
+* **Temperatură Retur Ambiental Cameră Zona 1 (`htEvTRr1`)**: Temperatura de retur aer din încăpere.
 * Temperatura pe tur a Zonei 1 (`currentTemp1`)
 * Temperaturile pe circuitele Zonei 2 și Zonei 3
 * Temperatura actuală din boilerul de ACM (`currentTempDomestic`)

@@ -31,6 +31,11 @@ from .device_enums import (AirPurifierFanWindSpeedStrEnum,
 from .device_features import DeviceFeatureEnum
 from .device_types import DeviceTypeEnum
 from .tcl_entity_base import TclEntityBase
+from .weather_curves import (
+    get_heating_curve_index,
+    get_heating_curve_name,
+    get_heating_curve_options,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -95,6 +100,8 @@ class DesiredStateHandlerForSelect:
                 return await self.SELECT_FRESH_AIR(value=value)
             case DeviceFeatureEnum.SELECT_WORK_MODE:
                 return await self.SELECT_WORK_MODE(value=value)
+            case DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1:
+                return await self.SELECT_ATW_HEATING_CURVE_1(value=value)
 
     def current_state(self) -> str:
         match self.deviceFeature:
@@ -181,6 +188,10 @@ class DesiredStateHandlerForSelect:
                 return getTemperatureType(self.device.data.temperature_type)
             case DeviceFeatureEnum.SELECT_WORK_MODE:
                 return getAirPurifierWorkMode(self.device.data.work_mode)
+            case DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1:
+                return get_heating_curve_name(
+                    getattr(self.device.data, "heating_curve_1", 1)
+                )
 
     def options_values(self) -> str:
         match self.deviceFeature:
@@ -221,6 +232,14 @@ class DesiredStateHandlerForSelect:
                 return [e.value for e in TemperatureTypeEnum]
             case DeviceFeatureEnum.SELECT_WORK_MODE:
                 return [e.value for e in AirPurifierWorkModeStrEnum]
+            case DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1:
+                return get_heating_curve_options()
+
+    async def SELECT_ATW_HEATING_CURVE_1(self, value: str):
+        curve_idx = get_heating_curve_index(value)
+        return await self.coordinator.get_aws_iot().async_set_desired_state(
+            self.device.device_id, {"htWthCtl1": curve_idx}
+        )
 
     async def SELECT_SLEEP_MODE(self, value: SleepModeEnum):
         desired_state = {}
@@ -1205,6 +1224,19 @@ async def async_setup_entry(
                     type="TemperatureType",
                     name="Temperature Type",
                     icon_fn=lambda device: "mdi:home-thermometer",
+                )
+            )
+
+        if DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1 in device.supported_features:
+            switches.append(
+                SelectHandler(
+                    hass=hass,
+                    coordinator=coordinator,
+                    device=device,
+                    deviceFeature=DeviceFeatureEnum.SELECT_ATW_HEATING_CURVE_1,
+                    type="HeatingWeatherCurve1",
+                    name="Heating Weather Curve Zone 1",
+                    icon_fn=lambda device: "mdi:chart-bell-curve",
                 )
             )
 
