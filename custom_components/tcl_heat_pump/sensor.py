@@ -10,6 +10,7 @@ from .config_entry import New_NameConfigEntry
 from .coordinator import IotDeviceCoordinator
 from .device import Device
 from .device_features import DeviceFeatureEnum
+from .device_types import DeviceTypeEnum
 from .tcl_entity_base import TclEntityBase
 from .weather_curves import (
     get_heating_curve_attributes,
@@ -26,12 +27,13 @@ async def async_setup_entry(
     sensors = []
     for device in config_entry.devices:
         if DeviceFeatureEnum.SENSOR_CURRENT_TEMPERATURE in device.supported_features:
+            s_name = "Room Temperature Zone 1" if device.device_type == DeviceTypeEnum.ATW_HEAT_PUMP else "Current Temperature"
             sensors.append(
                 TemperatureSensor(
                     coordinator=coordinator,
                     device=device,
                     type="CurrentTemperature",
-                    name="Current Temperature",
+                    name=s_name,
                     value_fn=lambda device: device.data.current_temperature,
                 )
             )
@@ -110,18 +112,21 @@ async def async_setup_entry(
                     coordinator=coordinator,
                     device=device,
                     type="CurveTargetWaterTempZone1",
-                    name="Curve Target Water Temp Zone 1",
+                    name="Curve Target Flow Temp Zone 1",
                     value_fn=lambda device: device.data.target_temp_curve_z1,
                 )
             )
-        if DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_RETURN_1 in device.supported_features:
+        if (
+            DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_FLOW_1 in device.supported_features
+            or DeviceFeatureEnum.SENSOR_ATW_WATER_TEMP_RETURN_1 in device.supported_features
+        ):
             sensors.append(
                 TemperatureSensor(
                     coordinator=coordinator,
                     device=device,
-                    type="ReturnWaterTempZone1",
-                    name="Return Water Temp Zone 1",
-                    value_fn=lambda device: device.data.temp_water_return_z1,
+                    type="WaterFlowTempZone1",
+                    name="Water Flow Temp Zone 1",
+                    value_fn=lambda device: device.data.temp_water_flow_z1,
                 )
             )
         if DeviceFeatureEnum.SENSOR_ATW_ROOM_TEMP_RETURN_1 in device.supported_features:
@@ -530,7 +535,8 @@ class WeatherCurveSensor(TclEntityBase, SensorEntity):
         ambient = getattr(self.device.data, "current_temperature", None)
         attrs = get_heating_curve_attributes(idx, ambient)
         attrs["grid_target_water_temp"] = getattr(self.device.data, "target_temp_curve_z1", 0)
-        attrs["water_temp_return"] = getattr(self.device.data, "temp_water_return_z1", 0)
+        attrs["water_flow_temp"] = getattr(self.device.data, "temp_water_flow_z1", 0)
+        attrs["water_temp_return"] = getattr(self.device.data, "temp_water_flow_z1", 0)
         attrs["weather_control_active"] = (
             getattr(self.device.data, "weather_control_sw_1", 0) == 1
         )

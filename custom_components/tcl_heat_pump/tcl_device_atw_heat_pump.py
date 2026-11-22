@@ -28,8 +28,10 @@ class TCL_ATW_HeatPump_DeviceData:
         self.heating_curve_1 = int(try_get_value(delta, aws_thing_state, "htWthCtl1", 1))
         self.cooling_curve_1 = int(try_get_value(delta, aws_thing_state, "clWthCtl1", 0))
         self.target_temp_curve_z1 = float(try_get_value(delta, aws_thing_state, "htWtTGd1", 0))
-        self.temp_water_return_z1 = float(try_get_value(delta, aws_thing_state, "htWtTRr1", 0))
-        self.temp_room_return_z1 = float(try_get_value(delta, aws_thing_state, "htEvTRr1", 0))
+        self.temp_water_flow_z1 = float(try_get_value(delta, aws_thing_state, "htWtTRr1", 0))
+        self.temp_water_return_z1 = self.temp_water_flow_z1
+        self.temp_room_reference_z1 = float(try_get_value(delta, aws_thing_state, "htEvTRr1", 0))
+        self.temp_room_return_z1 = self.temp_room_reference_z1
 
     device_id: str
     pwr_sw_1: int
@@ -50,7 +52,9 @@ class TCL_ATW_HeatPump_DeviceData:
     heating_curve_1: int
     cooling_curve_1: int
     target_temp_curve_z1: float
+    temp_water_flow_z1: float
     temp_water_return_z1: float
+    temp_room_reference_z1: float
     temp_room_return_z1: float
 
 

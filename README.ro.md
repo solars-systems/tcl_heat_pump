@@ -38,10 +38,11 @@
 
 ### 📊 Senzori și Telemetrie în Timp Real
 * **Senzor Inteligent Curbă Climatică (`sensor.atw_heating_curve_1`)**: Afișează numele curbei active și expune ca atribute întregul set de date termice (`curve_points`), tipul emițătorului și temperatura calculată pe tur.
-* **Temperatură Țintă Calculată din Curbă (`htWtTGd1`)**: Temperatura pe tur calculată dinamic de pompa de căldură pe baza curbei climatice active.
-* **Temperatură Retur Apă Zona 1 (`htWtTRr1`)**: Temperatura apei la întoarcerea din instalație.
-* **Temperatură Retur Ambiental Cameră Zona 1 (`htEvTRr1`)**: Temperatura de retur aer din încăpere.
-* **Temperatura pe tur a Zonei 1 (`currentTemp1`)**: Temperatura apei livrată pe tur.
+* **Temperatură Apă pe Tur Reală (`sensor.water_flow_temp_zone_1` / `htWtTRr1`)**: Temperatura reală a apei pe TUR livrată în instalația de încălzire.
+* **Temperatură Țintă pe Tur din Curbă (`sensor.curve_target_flow_temp_zone_1` / `htWtTGd1`)**: Temperatura pe tur calculată dinamic de pompa de căldură pe baza curbei climatice active.
+* **Temperatură Ambientală Cameră (`sensor.room_temperature_zone_1` / `currentTemp1`)**: Temperatura ambientală reală măsurată în încăpere (living).
+* **Temperatură Țintă Cameră (`htEvTGd1`)**: Temperatura ambientală dorită setată pentru încăpere.
+* **Temperatură Referință Ambientală (`htEvTRr1`)**: Temperatura de referință a camerei.
 * **Temperaturile pe circuitele Zonei 2 și Zonei 3**: Circuite auxiliare dacă sunt prezente.
 * **Temperatura actuală din boilerul de ACM (`currentTempDomestic`)**: Temperatura curentă din rezervorul de apă caldă menajeră.
 * **Stare Compresor și Conexiune**: Modul activ și starea online/offline.
