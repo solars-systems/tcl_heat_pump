@@ -23,6 +23,8 @@ class TCL_ATW_HeatPump_DeviceData:
         self.target_temp_heat_z1 = float(try_get_value(delta, aws_thing_state, "htWtTWd1", 0))
         self.target_temp_room_z1 = float(try_get_value(delta, aws_thing_state, "htEvTGd1", try_get_value(delta, aws_thing_state, "htEvTWd1", 20)))
         self.eco_status = int(try_get_value(delta, aws_thing_state, "ECOStatus", 0))
+        self.eco_mode = int(try_get_value(delta, aws_thing_state, "ECOMode", 0))
+        self.eco_timer = int(try_get_value(delta, aws_thing_state, "ECOTmSw", 0))
         self.ptc = int(try_get_value(delta, aws_thing_state, "PTC", 0))
         self.weather_control_sw_1 = int(try_get_value(delta, aws_thing_state, "wthCtlSw1", 0))
         self.heating_curve_1 = int(try_get_value(delta, aws_thing_state, "htWthCtl1", 1))
@@ -47,6 +49,8 @@ class TCL_ATW_HeatPump_DeviceData:
     target_temp_heat_z1: float
     target_temp_room_z1: float
     eco_status: int
+    eco_mode: int
+    eco_timer: int
     ptc: int
     weather_control_sw_1: int
     heating_curve_1: int

@@ -93,6 +93,10 @@ class DesiredStateHandlerForSwitch:
                 return await self.coordinator.get_aws_iot().async_set_desired_state(
                     self.device.device_id, {"ECOStatus": value}
                 )
+            case DeviceFeatureEnum.SWITCH_ATW_ECO_TIMER:
+                return await self.coordinator.get_aws_iot().async_set_desired_state(
+                    self.device.device_id, {"ECOTmSw": value}
+                )
             case DeviceFeatureEnum.SWITCH_ATW_PTC:
                 return await self.coordinator.get_aws_iot().async_set_desired_state(
                     self.device.device_id, {"PTC": value}
@@ -382,6 +386,19 @@ async def async_setup_entry(
                     name="ECO Mode Switch",
                     icon_fn=lambda device: "mdi:leaf" if device and device.data and device.data.eco_status == 1 else "mdi:leaf-off",
                     is_on_fn=lambda device: device.data.eco_status,
+                )
+            )
+        if DeviceFeatureEnum.SWITCH_ATW_ECO_TIMER in device.supported_features:
+            switches.append(
+                SwitchHandler(
+                    hass=hass,
+                    coordinator=coordinator,
+                    device=device,
+                    deviceFeature=DeviceFeatureEnum.SWITCH_ATW_ECO_TIMER,
+                    type="ATWEcoTimer",
+                    name="Energy Saving Timer",
+                    icon_fn=lambda device: "mdi:timer-outline" if device and device.data and getattr(device.data, "eco_timer", 0) == 1 else "mdi:timer-off-outline",
+                    is_on_fn=lambda device: getattr(device.data, "eco_timer", 0),
                 )
             )
         if DeviceFeatureEnum.SWITCH_ATW_PTC in device.supported_features:

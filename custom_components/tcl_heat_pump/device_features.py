@@ -44,6 +44,8 @@ class DeviceFeatureEnum(StrEnum):
     SWITCH_ATW_ZONE1_POWER = "switch.atw.zone1_power"
     SWITCH_ATW_DHW_POWER = "switch.atw.dhw_power"
     SWITCH_ATW_ECO = "switch.atw.eco"
+    SELECT_ATW_ECO_MODE = "select.atw.eco_mode"
+    SWITCH_ATW_ECO_TIMER = "switch.atw.eco_timer"
     SWITCH_ATW_PTC = "switch.atw.ptc"
     NUMBER_ATW_HEAT_Z1_TARGET = "number.atw.heat_z1_target"
     NUMBER_ATW_ROOM_Z1_TARGET = "number.atw.room_z1_target"
@@ -546,6 +548,8 @@ def getSupportedFeatures(
                     DeviceFeatureEnum.SWITCH_ATW_ZONE1_POWER,
                     DeviceFeatureEnum.SWITCH_ATW_DHW_POWER,
                     DeviceFeatureEnum.SWITCH_ATW_ECO,
+                    DeviceFeatureEnum.SELECT_ATW_ECO_MODE,
+                    DeviceFeatureEnum.SWITCH_ATW_ECO_TIMER,
                     DeviceFeatureEnum.SWITCH_ATW_PTC,
                     DeviceFeatureEnum.SWITCH_ATW_WEATHER_CONTROL_1,
                     DeviceFeatureEnum.NUMBER_ATW_HEAT_Z1_TARGET,
