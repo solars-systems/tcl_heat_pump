@@ -40,6 +40,19 @@ from .weather_curves import (
 _LOGGER = logging.getLogger(__name__)
 
 
+ATW_WORK_MODE_OPTIONS = ["Auto", "Cool", "Heat"]
+ATW_WORK_MODE_MAP = {
+    0: "Auto",
+    1: "Cool",
+    2: "Heat",
+}
+ATW_WORK_MODE_REVERSE_MAP = {
+    "Auto": 0,
+    "Cool": 1,
+    "Heat": 2,
+}
+
+
 ATW_ECO_MODE_OPTIONS = ["Standard", "ECO", "Turbo", "Auto"]
 
 
@@ -120,6 +133,8 @@ class DesiredStateHandlerForSelect:
                 return await self.SELECT_ATW_HEATING_CURVE_1(value=value)
             case DeviceFeatureEnum.SELECT_ATW_ECO_MODE:
                 return await self.SELECT_ATW_ECO_MODE(value=value)
+            case DeviceFeatureEnum.SELECT_ATW_WORK_MODE:
+                return await self.SELECT_ATW_WORK_MODE(value=value)
 
     def current_state(self) -> str:
         match self.deviceFeature:
@@ -214,6 +229,9 @@ class DesiredStateHandlerForSelect:
                 return get_atw_eco_mode_name(
                     getattr(self.device.data, "eco_mode", 0)
                 )
+            case DeviceFeatureEnum.SELECT_ATW_WORK_MODE:
+                work_mode = getattr(self.device.data, "work_mode", 0)
+                return ATW_WORK_MODE_MAP.get(work_mode, "Auto")
 
     def options_values(self) -> str:
         match self.deviceFeature:
@@ -258,6 +276,8 @@ class DesiredStateHandlerForSelect:
                 return get_heating_curve_options()
             case DeviceFeatureEnum.SELECT_ATW_ECO_MODE:
                 return ATW_ECO_MODE_OPTIONS
+            case DeviceFeatureEnum.SELECT_ATW_WORK_MODE:
+                return ATW_WORK_MODE_OPTIONS
 
     async def SELECT_ATW_HEATING_CURVE_1(self, value: str):
         curve_idx = get_heating_curve_index(value)
@@ -269,6 +289,12 @@ class DesiredStateHandlerForSelect:
         mode_idx = get_atw_eco_mode_index(value)
         return await self.coordinator.get_aws_iot().async_set_desired_state(
             self.device.device_id, {"ECOMode": mode_idx}
+        )
+
+    async def SELECT_ATW_WORK_MODE(self, value: str):
+        mode_val = ATW_WORK_MODE_REVERSE_MAP.get(value, 0)
+        return await self.coordinator.get_aws_iot().async_set_desired_state(
+            self.device.device_id, {"workMode": mode_val}
         )
 
     async def SELECT_SLEEP_MODE(self, value: SleepModeEnum):
@@ -1279,6 +1305,22 @@ async def async_setup_entry(
                     type="ATWEcoMode",
                     name="Energy Saving Mode",
                     icon_fn=lambda device: "mdi:leaf",
+                )
+            )
+        if DeviceFeatureEnum.SELECT_ATW_WORK_MODE in device.supported_features:
+            switches.append(
+                SelectHandler(
+                    hass=hass,
+                    coordinator=coordinator,
+                    device=device,
+                    deviceFeature=DeviceFeatureEnum.SELECT_ATW_WORK_MODE,
+                    type="ATWWorkMode",
+                    name="Operating Mode",
+                    icon_fn=lambda device: (
+                        "mdi:snowflake" if device and device.data and getattr(device.data, "work_mode", 0) == 1
+                        else "mdi:fire" if device and device.data and getattr(device.data, "work_mode", 0) == 2
+                        else "mdi:refresh-auto"
+                    ),
                 )
             )
 

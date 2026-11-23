@@ -10,5 +10,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/solars-systems/tcl_heat_pump/issues",
   "loggers": ["custom_components.tcl_heat_pump"],
-  "version": "1.0.7"
+  "version": "1.0.8"
 }
