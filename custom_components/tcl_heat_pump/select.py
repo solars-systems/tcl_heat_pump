@@ -40,16 +40,16 @@ from .weather_curves import (
 _LOGGER = logging.getLogger(__name__)
 
 
-ATW_WORK_MODE_OPTIONS = ["Auto", "Cool", "Heat"]
+ATW_WORK_MODE_OPTIONS = ["Auto", "Heat", "Cool"]
 ATW_WORK_MODE_MAP = {
     0: "Auto",
-    1: "Cool",
-    2: "Heat",
+    1: "Heat",
+    2: "Cool",
 }
 ATW_WORK_MODE_REVERSE_MAP = {
     "Auto": 0,
-    "Cool": 1,
-    "Heat": 2,
+    "Heat": 1,
+    "Cool": 2,
 }
 
 
@@ -1317,8 +1317,8 @@ async def async_setup_entry(
                     type="ATWWorkMode",
                     name="Operating Mode",
                     icon_fn=lambda device: (
-                        "mdi:snowflake" if device and device.data and getattr(device.data, "work_mode", 0) == 1
-                        else "mdi:fire" if device and device.data and getattr(device.data, "work_mode", 0) == 2
+                        "mdi:fire" if device and device.data and getattr(device.data, "work_mode", 0) == 1
+                        else "mdi:snowflake" if device and device.data and getattr(device.data, "work_mode", 0) == 2
                         else "mdi:refresh-auto"
                     ),
                 )
