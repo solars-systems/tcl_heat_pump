@@ -51,6 +51,8 @@
 * **Zone 2 & Zone 3 Water Temperatures**: Secondary and tertiary heating circuits if equipped.
 * **DHW Tank Temperature (`currentTempDomestic`)**: Actual domestic hot water storage cylinder temperature.
 * **Operating Mode & Compressor State**: Real-time mode (Heating / Cooling / DHW / Auto) and online status.
+* **Average Running Power (`Average Running Power`) [W]**: Dynamic average electrical power consumed during operation ($W = \frac{\text{Today Energy [kWh]}}{\text{Today Running Hours}} \times 1000$). Note: Since the TCL Cloud API does not provide a 1-second instantaneous power register, this entity dynamically computes the active running average power (switching to 15W standby when turned off), suitable for linking to power flow dashboards.
+* **Total Energy Consumption (`Total Energy Consumption`) [kWh]**: Cumulative lifetime electrical energy consumed by the heat pump.
 
 ---
 
@@ -146,6 +148,8 @@ Special thanks to [@nemesa](https://github.com/nemesa) for creating the initial 
 * **Temperaturile pe circuitele Zonei 2 și Zonei 3**: Circuite auxiliare dacă sunt prezente.
 * **Temperatura actuală din boilerul de ACM (`currentTempDomestic`)**: Temperatura curentă din rezervorul de apă caldă menajeră.
 * **Stare Compresor și Conexiune**: Modul activ și starea online/offline.
+* **Putere Medie de Funcționare (`Average Running Power`) [W]**: Puterea electrică medie absorbită în timpul funcționării active ($W = \frac{\text{Energie Azi [kWh]}}{\text{Ore Funcționare Azi}} \times 1000$). Notă: Deoarece protocolul cloud TCL nu oferă un registru de wați instantaneu secundă de secundă, acest senzor calculează dinamic media puterii de funcționare activă (trecând la 15W standby la oprire), ideal pentru diagramele de flux energetic Solars Systems.
+* **Consum Total Energie (`Total Energy Consumption`) [kWh]**: Energia electrică totală cumulată de la punerea în funcțiune.
 
 ---
 

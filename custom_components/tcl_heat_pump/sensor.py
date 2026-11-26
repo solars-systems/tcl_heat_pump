@@ -3,7 +3,7 @@ import logging
 from typing import Any
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity,SensorStateClass
-from homeassistant.const import UnitOfEnergy, UnitOfTemperature, UnitOfTime, PERCENTAGE
+from homeassistant.const import UnitOfEnergy, UnitOfPower, UnitOfTemperature, UnitOfTime, PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from .config_entry import New_NameConfigEntry
@@ -17,6 +17,31 @@ from .weather_curves import (
     get_heating_curve_name,
 )
 _LOGGER = logging.getLogger(__name__)
+
+def _calc_avg_running_power(device: Device) -> float:
+    """Calculate average running electrical power in Watts based on energy and run time."""
+    extra = getattr(device, "extra_tcl_data", {}) or {}
+    today_kwh = float(extra.get("today_total_electricity", 0) or 0)
+    today_min = float(extra.get("today_work_time", 0) or 0)
+
+    avg_w = 0.0
+    if today_kwh > 0 and today_min > 0:
+        hours = today_min / 60.0
+        avg_w = (today_kwh / hours) * 1000.0
+    else:
+        yest_kwh = float(extra.get("yesterday_total_electricity", 0) or 0)
+        yest_min = float(extra.get("yesterday_work_time", 0) or 0)
+        if yest_kwh > 0 and yest_min > 0:
+            avg_w = (yest_kwh / (yest_min / 60.0)) * 1000.0
+
+    if avg_w > 0:
+        pwr_sw = getattr(device, "reported", {}).get("pwrSw1", 1)
+        if pwr_sw == 0:
+            return 15.0  # Standby power when zone 1 switch is off
+        return round(avg_w, 1)
+
+    return 0.0
+
 async def async_setup_entry(
     hass: HomeAssistant,
     config_entry: New_NameConfigEntry,
@@ -315,6 +340,24 @@ async def async_setup_entry(
                     value_fn=lambda device: round(device.extra_tcl_data.get("yesterday_total_electricity",0),2),
                 )
             )
+            sensors.append(
+                EnergyConsumptionSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="TotalEnergyConsumption",
+                    name="Total Energy Consumption",
+                    value_fn=lambda device: round(device.extra_tcl_data.get("total_electricity",0),2),
+                )
+            )
+            sensors.append(
+                PowerConsumptionSensor(
+                    coordinator=coordinator,
+                    device=device,
+                    type="AverageRunningPower",
+                    name="Average Running Power",
+                    value_fn=lambda device: _calc_avg_running_power(device),
+                )
+            )
         if DeviceFeatureEnum.SENSOR_WORK_TIME_DAILY in device.supported_features:            
             sensors.append(
                 IntNumberSensor(
@@ -559,3 +602,33 @@ class WeatherCurveSensor(TclEntityBase, SensorEntity):
             getattr(self.device.data, "weather_control_sw_1", 0) == 1
         )
         return attrs
+
+
+class PowerConsumptionSensor(TclEntityBase, SensorEntity):
+    def __init__(
+        self,
+        coordinator: IotDeviceCoordinator,
+        device: Device,
+        type: str,
+        name: str,
+        value_fn,
+    ) -> None:
+        TclEntityBase.__init__(self, coordinator, type, name, device)
+        self.value_fn = value_fn
+
+    @property
+    def device_class(self) -> str:
+        return SensorDeviceClass.POWER
+
+    @property
+    def native_value(self) -> int | float:
+        self.device = self.coordinator.get_device_by_id(self.device.device_id)
+        return round(float(self.value_fn(self.device)), 1)
+
+    @property
+    def native_unit_of_measurement(self) -> str | None:
+        return UnitOfPower.WATT
+
+    @property
+    def state_class(self) -> str | None:
+        return SensorStateClass.MEASUREMENT

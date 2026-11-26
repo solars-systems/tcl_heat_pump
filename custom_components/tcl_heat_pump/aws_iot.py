@@ -144,6 +144,7 @@ class AwsIot:
         now_timestamp=int(datetime.datetime.now().timestamp())
         today_total_electricity=0    
         yesterday_total_electricity=0    
+        total_electricity=0
         need_save=False
         stored_data=device_storage
         power_consumption_data_enabled= safe_get_value(device_storage, "non_user_config.power_consumption.enabled", False)
@@ -158,6 +159,8 @@ class AwsIot:
                     stored_data, need_save = safe_set_value(stored_data, "non_user_config.power_consumption.last_response.timestamp", now_timestamp, True)
                     stored_data, need_save = safe_set_value(stored_data, "non_user_config.power_consumption.last_response.data", response, True)  
             if response.code==0:
+                if hasattr(response.data, 'curr_statistics_res') and response.data.curr_statistics_res:
+                    total_electricity = getattr(response.data.curr_statistics_res, 'total_electricity', 0) or 0
                 for day in response.data.consumption_details:
                     if day.date==get_day_for_data():
                         today_total_electricity=day.consumption
@@ -190,6 +193,7 @@ class AwsIot:
         return {
             "today_total_electricity": today_total_electricity,
             "yesterday_total_electricity": yesterday_total_electricity,
+            "total_electricity": total_electricity,
             "today_work_time":today_work_time,
             "yesterday_work_time":yesterday_work_time
         }
