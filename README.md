@@ -39,8 +39,8 @@
 * **Heating Weather Curve Zone 1 Dropdown (`select.heating_weather_curve_zone_1`)**: Friendly curve selector matching the official TCL ATW R290 manual:
   - **Low Temperature Curves (Underfloor Heating)**: Curves 1 – 8 (flow range 24°C to 38°C) + Curve 9 (Custom Engineering)
   - **High Temperature Curves (Radiators)**: Curves 1 – 8 (flow range 35°C to 55°C) + Curve 9 (Custom Engineering)
-* **Heating Weather Curve Slider (`htWthCtl1`)**: Direct numeric curve index (0 – 17).
-* **Cooling Weather Curve Slider (`clWthCtl1`)**: Direct numeric cooling curve index (0 – 8).
+* **Heating Weather Curve Slider (`htWthCtl1`)**: Direct numeric curve index (1 – 18).
+* **Cooling Weather Curve Slider (`clWthCtl1`)**: Direct numeric cooling curve index (1 – 8).
 
 ### 📊 Comprehensive Telemetry & Sensors
 * **Smart Weather Curve Sensor (`sensor.atw_heating_curve_1`)**: Displays active curve name with full state attributes (lookup table from -20°C to +20°C, emitter type, and calculated water target).
@@ -64,28 +64,28 @@ The integration digitizes the complete table from the official TCL ATW R290 manu
 ### 1. Low Temperature Curves (Underfloor Heating)
 | Curve No. | Name in Home Assistant | Ambient $\le -20^\circ\text{C}$ | $-10^\circ\text{C}$ | $0^\circ\text{C}$ | $+10^\circ\text{C}$ | $\ge 20^\circ\text{C}$ | Emitter Type |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **0** | `Curve 1 Underfloor (32°C - 38°C)` | 38°C | 36°C | 35°C | 33°C | 32°C | Underfloor Heating |
-| **1** | `Curve 2 Underfloor (31°C - 37°C)` | 37°C | 35°C | 34°C | 32°C | 31°C | Underfloor Heating |
-| **2** | `Curve 3 Underfloor (29°C - 36°C)` | 36°C | 34°C | 33°C | 31°C | 29°C | Underfloor Heating |
-| **3** | `Curve 4 Underfloor (28°C - 35°C)` | 35°C | 33°C | 32°C | 30°C | 28°C | Underfloor Heating |
-| **4** | `Curve 5 Underfloor (27°C - 34°C)` | 34°C | 32°C | 31°C | 29°C | 27°C | Underfloor Heating |
-| **5** | `Curve 6 Underfloor (26°C - 32°C)` | 32°C | 31°C | 29°C | 28°C | 26°C | Underfloor Heating |
-| **6** | `Curve 7 Underfloor (25°C - 31°C)` | 31°C | 30°C | 28°C | 27°C | 25°C | Underfloor Heating |
-| **7** | `Curve 8 Underfloor (24°C - 29°C)` | 29°C | 28°C | 26°C | 25°C | 24°C | Underfloor Heating |
-| **8** | `Curve 9 Underfloor (Custom / Engineering)` | *Custom* | *Custom* | *Custom* | *Custom* | *Custom* | Set in Engineering Menu |
+| **1** | `Curve 1 Underfloor (32°C - 38°C)` | 38°C | 36°C | 35°C | 33°C | 32°C | Underfloor Heating |
+| **2** | `Curve 2 Underfloor (31°C - 37°C)` | 37°C | 35°C | 34°C | 32°C | 31°C | Underfloor Heating |
+| **3** | `Curve 3 Underfloor (29°C - 36°C)` | 36°C | 34°C | 33°C | 31°C | 29°C | Underfloor Heating |
+| **4** | `Curve 4 Underfloor (28°C - 35°C)` | 35°C | 33°C | 32°C | 30°C | 28°C | Underfloor Heating |
+| **5** | `Curve 5 Underfloor (27°C - 34°C)` | 34°C | 32°C | 31°C | 29°C | 27°C | Underfloor Heating |
+| **6** | `Curve 6 Underfloor (26°C - 32°C)` | 32°C | 31°C | 29°C | 28°C | 26°C | Underfloor Heating |
+| **7** | `Curve 7 Underfloor (25°C - 31°C)` | 31°C | 30°C | 28°C | 27°C | 25°C | Underfloor Heating |
+| **8** | `Curve 8 Underfloor (24°C - 29°C)` | 29°C | 28°C | 26°C | 25°C | 24°C | Underfloor Heating |
+| **9** | `Curve 9 Underfloor (Custom / Engineering)` | *Custom* | *Custom* | *Custom* | *Custom* | *Custom* | Set in Engineering Menu |
 
 ### 2. High Temperature Curves (Radiators / Fan Coils)
 | Curve No. | Name in Home Assistant | Ambient $\le -20^\circ\text{C}$ | $-10^\circ\text{C}$ | $0^\circ\text{C}$ | $+10^\circ\text{C}$ | $\ge 20^\circ\text{C}$ | Emitter Type |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **9** | `Curve 1 Radiators (50°C - 55°C)` | 55°C | 54°C | 52°C | 51°C | 50°C | Radiators / Fan Coils |
-| **10** | `Curve 2 Radiators (48°C - 53°C)` | 53°C | 52°C | 50°C | 49°C | 48°C | Radiators / Fan Coils |
-| **11** | `Curve 3 Radiators (47°C - 52°C)` | 52°C | 51°C | 49°C | 48°C | 47°C | Radiators / Fan Coils |
-| **12** | `Curve 4 Radiators (45°C - 50°C)` | 50°C | 49°C | 47°C | 46°C | 45°C | Radiators / Fan Coils |
-| **13** | `Curve 5 Radiators (43°C - 48°C)` | 48°C | 47°C | 45°C | 44°C | 43°C | Radiators / Fan Coils |
-| **14** | `Curve 6 Radiators (40°C - 45°C)` | 45°C | 44°C | 42°C | 41°C | 40°C | Radiators / Fan Coils |
-| **15** | `Curve 7 Radiators (38°C - 43°C)` | 43°C | 42°C | 40°C | 39°C | 38°C | Radiators / Fan Coils |
-| **16** | `Curve 8 Radiators (35°C - 40°C)` | 40°C | 39°C | 37°C | 36°C | 35°C | Radiators / Fan Coils |
-| **17** | `Curve 9 Radiators (Custom / Engineering)` | *Custom* | *Custom* | *Custom* | *Custom* | *Custom* | Set in Engineering Menu |
+| **10** | `Curve 1 Radiators (50°C - 55°C)` | 55°C | 54°C | 52°C | 51°C | 50°C | Radiators / Fan Coils |
+| **11** | `Curve 2 Radiators (48°C - 53°C)` | 53°C | 52°C | 50°C | 49°C | 48°C | Radiators / Fan Coils |
+| **12** | `Curve 3 Radiators (47°C - 52°C)` | 52°C | 51°C | 49°C | 48°C | 47°C | Radiators / Fan Coils |
+| **13** | `Curve 4 Radiators (45°C - 50°C)` | 50°C | 49°C | 47°C | 46°C | 45°C | Radiators / Fan Coils |
+| **14** | `Curve 5 Radiators (43°C - 48°C)` | 48°C | 47°C | 45°C | 44°C | 43°C | Radiators / Fan Coils |
+| **15** | `Curve 6 Radiators (40°C - 45°C)` | 45°C | 44°C | 42°C | 41°C | 40°C | Radiators / Fan Coils |
+| **16** | `Curve 7 Radiators (38°C - 43°C)` | 43°C | 42°C | 40°C | 39°C | 38°C | Radiators / Fan Coils |
+| **17** | `Curve 8 Radiators (35°C - 40°C)` | 40°C | 39°C | 37°C | 36°C | 35°C | Radiators / Fan Coils |
+| **18** | `Curve 9 Radiators (Custom / Engineering)` | *Custom* | *Custom* | *Custom* | *Custom* | *Custom* | Set in Engineering Menu |
 
 ---
 

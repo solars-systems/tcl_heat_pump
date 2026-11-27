@@ -339,7 +339,11 @@ async def do_account_auth(
 
     response_obj = response.json()
     if verbose_logging:
-        _LOGGER.info("TCL-Service.do_account_auth response: %s", response_obj)
+        _LOGGER.info(
+            "TCL-Service.do_account_auth status_code: %s, status: %s",
+            response.status_code,
+            response_obj.get("status") if isinstance(response_obj, dict) else None,
+        )
     if response.status_code == 200:
         authResponse = DoAccountAuthResponse(response_obj)
         if authResponse.status == 1:
@@ -368,7 +372,11 @@ async def get_cloud_urls(
     response = await httpx_client.post(cloud_urls, json=payload, headers=headers, timeout=15)
     response_obj = response.json()
     if verbose_logging:
-        _LOGGER.info("TCL-Service.get_cloud_urls response: %s", response_obj)
+        _LOGGER.info(
+            "TCL-Service.get_cloud_urls status_code: %s, status: %s",
+            response.status_code,
+            response_obj.get("status") if isinstance(response_obj, dict) else None,
+        )
     if response.status_code == 200:
         return CloudUrlsResponse(response_obj)
     return None
@@ -402,7 +410,11 @@ async def refreshTokens(
     response = await httpx_client.post(url, json=payload, headers=headers, timeout=15)
     response_obj = response.json()
     if verbose_logging:
-        _LOGGER.info("TCL-Service.refreshTokens response: %s", response_obj)
+        _LOGGER.info(
+            "TCL-Service.refreshTokens status_code: %s, status: %s",
+            response.status_code,
+            response_obj.get("status") if isinstance(response_obj, dict) else None,
+        )
     if response.status_code == 200:
         return RefreshTokensResponse(response_obj)
     return None
@@ -435,7 +447,11 @@ async def get_aws_credentials(
     response = await httpx_client.post(url, json=payload, headers=headers, timeout=15)
     response_obj = response.json()
     if verbose_logging:
-        _LOGGER.info("TCL-Service.get_aws_credentials response: %s", response_obj)
+        _LOGGER.info(
+            "TCL-Service.get_aws_credentials status_code: %s, credentials_received: %s",
+            response.status_code,
+            isinstance(response_obj, dict) and "Credentials" in response_obj,
+        )
     if response.status_code == 200:
         return GetAwsCredentialsResponse(response_obj)
     return None

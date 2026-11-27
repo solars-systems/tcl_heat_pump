@@ -33,8 +33,8 @@
 * **Meniu Selector Curbă Climatică Încălzire Zona 1 (`select.heating_weather_curve_zone_1`)**: Selector prietenos cu toate curbele oficiale din manualul TCL ATW R290:
   - **Curbe Temperatură Joasă (Pardoseală)**: Curbele 1 – 8 (plaje tur între 24°C și 38°C) + Curba 9 (Inginerie)
   - **Curbe Temperatură Înaltă (Radiatoare / Calorifere)**: Curbele 1 – 8 (plaje tur între 35°C și 55°C) + Curba 9 (Inginerie)
-* **Slider Numeric Curbă Încălzire (`htWthCtl1`)**: Reglaj direct numeric (0 – 17).
-* **Slider Numeric Curbă Răcire (`clWthCtl1`)**: Reglaj direct curbe de răcire (0 – 8).
+* **Slider Numeric Curbă Încălzire (`htWthCtl1`)**: Reglaj direct numeric (1 – 18).
+* **Slider Numeric Curbă Răcire (`clWthCtl1`)**: Reglaj direct curbe de răcire (1 – 8).
 
 ### 📊 Senzori și Telemetrie în Timp Real
 * **Senzor Inteligent Curbă Climatică (`sensor.atw_heating_curve_1`)**: Afișează numele curbei active și expune ca atribute întregul set de date termice (`curve_points`), tipul emițătorului și temperatura calculată pe tur.
@@ -58,28 +58,28 @@ Conform manualului oficial TCL ATW R290:
 ### 1. Curbe Temperatură Joasă (Încălzire în Pardoseală)
 | Nr. Curbă | Denumire în Home Assistant | Temp. Ext $\le -20^\circ\text{C}$ | $-10^\circ\text{C}$ | $0^\circ\text{C}$ | $+10^\circ\text{C}$ | $\ge 20^\circ\text{C}$ | Tip Emițător |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **0** | `Curba 1 Pardoseală (32°C - 38°C)` | 38°C | 36°C | 35°C | 33°C | 32°C | Pardoseală (Low Temp) |
-| **1** | `Curba 2 Pardoseală (31°C - 37°C)` | 37°C | 35°C | 34°C | 32°C | 31°C | Pardoseală (Low Temp) |
-| **2** | `Curba 3 Pardoseală (29°C - 36°C)` | 36°C | 34°C | 33°C | 31°C | 29°C | Pardoseală (Low Temp) |
-| **3** | `Curba 4 Pardoseală (28°C - 35°C)` | 35°C | 33°C | 32°C | 30°C | 28°C | Pardoseală (Low Temp) |
-| **4** | `Curba 5 Pardoseală (27°C - 34°C)` | 34°C | 32°C | 31°C | 29°C | 27°C | Pardoseală (Low Temp) |
-| **5** | `Curba 6 Pardoseală (26°C - 32°C)` | 32°C | 31°C | 29°C | 28°C | 26°C | Pardoseală (Low Temp) |
-| **6** | `Curba 7 Pardoseală (25°C - 31°C)` | 31°C | 30°C | 28°C | 27°C | 25°C | Pardoseală (Low Temp) |
-| **7** | `Curba 8 Pardoseală (24°C - 29°C)` | 29°C | 28°C | 26°C | 25°C | 24°C | Pardoseală (Low Temp) |
-| **8** | `Curba 9 Pardoseală (Personalizată)` | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | Setare Meniu Inginerie |
+| **1** | `Curba 1 Pardoseală (32°C - 38°C)` | 38°C | 36°C | 35°C | 33°C | 32°C | Pardoseală (Low Temp) |
+| **2** | `Curba 2 Pardoseală (31°C - 37°C)` | 37°C | 35°C | 34°C | 32°C | 31°C | Pardoseală (Low Temp) |
+| **3** | `Curba 3 Pardoseală (29°C - 36°C)` | 36°C | 34°C | 33°C | 31°C | 29°C | Pardoseală (Low Temp) |
+| **4** | `Curba 4 Pardoseală (28°C - 35°C)` | 35°C | 33°C | 32°C | 30°C | 28°C | Pardoseală (Low Temp) |
+| **5** | `Curba 5 Pardoseală (27°C - 34°C)` | 34°C | 32°C | 31°C | 29°C | 27°C | Pardoseală (Low Temp) |
+| **6** | `Curba 6 Pardoseală (26°C - 32°C)` | 32°C | 31°C | 29°C | 28°C | 26°C | Pardoseală (Low Temp) |
+| **7** | `Curba 7 Pardoseală (25°C - 31°C)` | 31°C | 30°C | 28°C | 27°C | 25°C | Pardoseală (Low Temp) |
+| **8** | `Curba 8 Pardoseală (24°C - 29°C)` | 29°C | 28°C | 26°C | 25°C | 24°C | Pardoseală (Low Temp) |
+| **9** | `Curba 9 Pardoseală (Personalizată)` | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | Setare Meniu Inginerie |
 
 ### 2. Curbe Temperatură Înaltă (Radiatoare / Calorifere)
 | Nr. Curbă | Denumire în Home Assistant | Temp. Ext $\le -20^\circ\text{C}$ | $-10^\circ\text{C}$ | $0^\circ\text{C}$ | $+10^\circ\text{C}$ | $\ge 20^\circ\text{C}$ | Tip Emițător |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **9** | `Curba 1 Calorifere (50°C - 55°C)` | 55°C | 54°C | 52°C | 51°C | 50°C | Calorifere / Radiatoare |
-| **10** | `Curba 2 Calorifere (48°C - 53°C)` | 53°C | 52°C | 50°C | 49°C | 48°C | Calorifere / Radiatoare |
-| **11** | `Curba 3 Calorifere (47°C - 52°C)` | 52°C | 51°C | 49°C | 48°C | 47°C | Calorifere / Radiatoare |
-| **12** | `Curba 4 Calorifere (45°C - 50°C)` | 50°C | 49°C | 47°C | 46°C | 45°C | Calorifere / Radiatoare |
-| **13** | `Curba 5 Calorifere (43°C - 48°C)` | 48°C | 47°C | 45°C | 44°C | 43°C | Calorifere / Radiatoare |
-| **14** | `Curba 6 Calorifere (40°C - 45°C)` | 45°C | 44°C | 42°C | 41°C | 40°C | Calorifere / Radiatoare |
-| **15** | `Curba 7 Calorifere (38°C - 43°C)` | 43°C | 42°C | 40°C | 39°C | 38°C | Calorifere / Radiatoare |
-| **16** | `Curba 8 Calorifere (35°C - 40°C)` | 40°C | 39°C | 37°C | 36°C | 35°C | Calorifere / Radiatoare |
-| **17** | `Curba 9 Calorifere (Personalizată)` | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | Setare Meniu Inginerie |
+| **10** | `Curba 1 Calorifere (50°C - 55°C)` | 55°C | 54°C | 52°C | 51°C | 50°C | Calorifere / Radiatoare |
+| **11** | `Curba 2 Calorifere (48°C - 53°C)` | 53°C | 52°C | 50°C | 49°C | 48°C | Calorifere / Radiatoare |
+| **12** | `Curba 3 Calorifere (47°C - 52°C)` | 52°C | 51°C | 49°C | 48°C | 47°C | Calorifere / Radiatoare |
+| **13** | `Curba 4 Calorifere (45°C - 50°C)` | 50°C | 49°C | 47°C | 46°C | 45°C | Calorifere / Radiatoare |
+| **14** | `Curba 5 Calorifere (43°C - 48°C)` | 48°C | 47°C | 45°C | 44°C | 43°C | Calorifere / Radiatoare |
+| **15** | `Curba 6 Calorifere (40°C - 45°C)` | 45°C | 44°C | 42°C | 41°C | 40°C | Calorifere / Radiatoare |
+| **16** | `Curba 7 Calorifere (38°C - 43°C)` | 43°C | 42°C | 40°C | 39°C | 38°C | Calorifere / Radiatoare |
+| **17** | `Curba 8 Calorifere (35°C - 40°C)` | 40°C | 39°C | 37°C | 36°C | 35°C | Calorifere / Radiatoare |
+| **18** | `Curba 9 Calorifere (Personalizată)` | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | *Configurabil* | Setare Meniu Inginerie |
 
 ---
 

@@ -201,11 +201,6 @@ class TclHomeUnofficialConfigFlow(ConfigFlow, domain=DOMAIN):
             last_step=True,
         )
 
-    async def async_step_reconfigure(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
-        _LOGGER.info("Reconfiguring TCL Home Unofficial integration %s", user_input)
-
 
 class TclHomeUnofficialOptionsFlowHandler(OptionsFlow):
     async def async_step_init(

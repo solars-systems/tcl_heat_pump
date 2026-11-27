@@ -12,5 +12,8 @@
   "loggers": [
     "custom_components.tcl_heat_pump"
   ],
-  "version": "1.0.13"
+  "requirements": [
+    "boto3==1.35.54"
+  ],
+  "version": "1.0.14"
 }
