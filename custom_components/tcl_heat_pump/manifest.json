@@ -13,7 +13,7 @@
     "custom_components.tcl_heat_pump"
   ],
   "requirements": [
-    "boto3==1.35.54"
+    "boto3==1.43.117"
   ],
   "version": "1.0.14"
 }
