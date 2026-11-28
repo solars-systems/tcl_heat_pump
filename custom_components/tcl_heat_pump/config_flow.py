@@ -16,6 +16,11 @@ from homeassistant.config_entries import (
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
+from homeassistant.helpers.selector import (
+    TextSelector,
+    TextSelectorConfig,
+    TextSelectorType,
+)
 from homeassistant.helpers.schema_config_entry_flow import (
     SchemaConfigFlowHandler,
     SchemaFlowFormStep,
@@ -111,7 +116,9 @@ class TclHomeUnofficialConfigFlow(ConfigFlow, domain=DOMAIN):
         data_schema = vol.Schema(
             {
                 vol.Required(CONF_USERNAME, default=user_name): str,
-                vol.Required(CONF_PASSWORD, default=user_password): str,
+                vol.Required(CONF_PASSWORD, default=user_password): TextSelector(
+                    TextSelectorConfig(type=TextSelectorType.PASSWORD)
+                ),
             }
         )
 
@@ -232,7 +239,9 @@ class TclHomeUnofficialOptionsFlowHandler(OptionsFlow):
         data_schema = vol.Schema(
             {
                 vol.Required(CONF_USERNAME, default=data.username): str,
-                vol.Required(CONF_PASSWORD, default=data.password): str,
+                vol.Required(CONF_PASSWORD, default=data.password): TextSelector(
+                    TextSelectorConfig(type=TextSelectorType.PASSWORD)
+                ),
             }
         )
 
